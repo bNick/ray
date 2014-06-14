@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1922189293">
+    <data-source source="LOCAL" name="ray.dev" uuid="5e9c1cfe-5c99-42b8-b5ca-39fd1219cc36">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/wg115u1_base</jdbc-url>
+      <user-name>wg115u1_base</user-name>
+      <user-password>dffedfc1dfebdfe5df9edfccdff2df9c</user-password>
+      <driver-properties>
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+      </driver-properties>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
