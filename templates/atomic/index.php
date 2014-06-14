@@ -196,15 +196,8 @@ padding-top: 5px;
 				<div class="banner2">
                     <?php
                     $db = & JFactory::getDBO();
-                    $query = "SELECT * FROM 0y13_ray_banner  WHERE page ='" . urldecode($_SERVER['REQUEST_URI']) . "' and position='0' and data > '" . date("Y-m-d") . "'  ORDER BY RAND()  limit 1; ";
-                    $db->setQuery($query);
-
-                    if ($row = $db->loadObject()) {
-                        echo ' <a href="' . $row->url . '"> <img style="width:854px; height: 87px;" src="' . $row->object . '" class="topbanned"> </a> ';
-                    } else {
-                        $ban = GetBanner();
-                        echo '<img style="width:854px; height: 87px;" src="' . $ban . '" class="topbanned">';
-                    }
+                    $ban = GetBanner($db);
+                    echo ' <a href="' . $ban["url"] . '"> <img style="width:854px; height: 87px;" src="' . $ban["src"] . '" class="topbanned"> </a> ';
                     ?>
 				</div>
 			</div>		
@@ -994,7 +987,19 @@ $controller = JRequest::getWord('view', 'itemlist');
 </html>
 
 <?php
-function GetBanner(){
-    return "banner.jpg";
+function GetBanner($db){
+    $getbanner = array(
+        "url" => "#",
+        "src" => "banner.jpg"
+    );
+
+    $query = "SELECT * FROM 0y13_ray_banner  WHERE page ='" . urldecode($_SERVER['REQUEST_URI']) . "' and position='0' and data > '" . date("Y-m-d") . "'  ORDER BY RAND()  limit 1; ";
+    $db->setQuery($query);
+
+    if ($row = $db->loadObject()) {
+        $getbanner["url"] = $row->url;
+        $getbanner["src"] = $row->object;
+    }
+    return $getbanner;
 }
 ?>
