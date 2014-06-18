@@ -387,29 +387,28 @@ $curent_page =  '<a href="'.$clrs.'"> Главная  </a> <img src="templates/a
 		}
 			
 		echo $curent_page;
-		
-		
-		
+
+
 function get_cantry($ferst_word, $uin)
 {
-	$db = & JFactory::getDBO();
-	
-	$query_temp="SELECT * FROM d0y13_ray_cantry WHERE id=".$uin ;
-			
-	$db->setQuery($query_temp);		
-	if($row_temp = $db->loadObject()){
-				
-	if(JRequest::getVar( 'TYPESITE' ) == '')
-		$TYPESITE = 1;
-	else
-		$TYPESITE = 	JRequest::getVar( 'TYPESITE' );
-		
-	if($TYPESITE == 1)
-		return '  <a href="'.$ferst_word.'-'.$row_temp->alias3.'"> '.$row_temp->name.' </a>  <img src="templates/atomic/images/strela.png">   ';
-	else
-		return '  <a href="'.$ferst_word.'-'.$row_temp->alias2.'"> '.$row_temp->name.' </a>  <img src="templates/atomic/images/strela.png">   ';
-	}
-	
+    $db = & JFactory::getDBO();
+
+    $query_temp = "SELECT * FROM d0y13_ray_cantry WHERE id=" . $uin;
+
+    $db->setQuery($query_temp);
+
+    if ($row_temp = $db->loadObject()) {
+
+        if (JRequest::getVar('TYPESITE') == '')
+            $TYPESITE = 1;
+        else
+            $TYPESITE = JRequest::getVar('TYPESITE');
+
+        if ($TYPESITE == 1)
+            return '  <a href="' . $ferst_word . '-' . $row_temp->alias3 . '"> ' . $row_temp->name . ' </a>  <img src="templates/atomic/images/strela.png">   ';
+        else
+            return '  <a href="' . $ferst_word . '-' . $row_temp->alias2 . '"> ' . $row_temp->name . ' </a>  <img src="templates/atomic/images/strela.png">   ';
+    }
 }
 			
 		
@@ -722,14 +721,6 @@ IF ((SELECT COUNT(*) FROM 0y13_ray_image WHERE main=1 and item=0y13_ray_item.id)
         $banner_fix[$row_b->mesto] = $banner;
     }
 
-
-
-
-
-
-
-
-    
   $queryst_banner=" SELECT  id,		 	 	
 	name, 	 	 	 
 	alias,	
@@ -760,8 +751,6 @@ IF ((SELECT COUNT(*) FROM 0y13_ray_image WHERE main=1 and item=0y13_ray_item.id)
 	(SELECT name FROM 0y13_ray_image WHERE main=1 and item=0y13_ray_item.id limit 1),  
  	(SELECT name FROM 0y13_ray_image WHERE  item=0y13_ray_item.id limit 1))) as photo,
 (SELECT value FROM 0y13_ray_image WHERE item=0y13_ray_item.id  limit 1) as photo_v
-
-
 
   FROM 0y13_ray_item WHERE act = 1 and oplata > 0 and act_oplata > 0  ".$whr.$where."  ORDER BY RAND() LIMIT 7;";
 	//echo $queryst_banner;
@@ -987,6 +976,10 @@ $controller = JRequest::getWord('view', 'itemlist');
 </html>
 
 <?php
+/*
+Added by bNick at 18.06.2014
+в рамках проекта кастомизации баннерной системы сайта
+*/
 function GetBanner($db){
     $getbanner = array(
         "url" => "#",
@@ -997,8 +990,19 @@ function GetBanner($db){
     $db->setQuery($query);
 
     if ($row = $db->loadObject()) {
+        //Проверяем наличие ссылки на баннер в разделе "баннеры"
         $getbanner["url"] = $row->url;
         $getbanner["src"] = $row->object;
+    }
+    else{
+        //Проверяем наличие ссылки на баннер в разделе "страны"
+        $query = "SELECT * FROM d0y13_ray_cantry  WHERE id ='" . $_REQUEST["id"] . "' ";
+        $db->setQuery($query);
+        $row = $db->loadObject();
+        if (isset($row->banner1)) {
+            $getbanner["url"] = "#";
+            $getbanner["src"] = $row->banner1;
+        }
     }
     return $getbanner;
 }
