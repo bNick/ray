@@ -1000,6 +1000,7 @@ function GetBanner($db){
         $db->setQuery($query);
         $row = $db->loadObject();
         if (isset($row->banner1)) {
+            //ToDo: Проверка на время действия баннера
             $getbanner["url"] = "#";
             $getbanner["src"] = $row->banner1;
         }
