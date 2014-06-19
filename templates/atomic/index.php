@@ -1,9 +1,6 @@
 <?php
 
-
-
 $session =JFactory::getSession();
-
 
 $ts= $session->get( 'ts');
 //echo $ts;
@@ -35,7 +32,6 @@ if($ts > '')
 	//echo '00000';
       JRequest::setVar( 'TYPESITE', $ts );
 	}
-	
 
 }
 else
@@ -53,8 +49,6 @@ $session->set( 'ts', 1);
 	}
 }
 
-
-
 if($_GET['ts'] == 'reset')
 {
       JRequest::setVar( 'TYPESITE', 1 );
@@ -66,12 +60,10 @@ if($_GET['ts'] == 'reset')
       }
 }
 
-
 if(JRequest::getVar( 'TYPESITE' ) > 1)
 {
 	$clrs = '?ts=reset';
 }
-
 
 $ts= $session->get( 'ts');
 //echo $ts;
@@ -98,8 +90,7 @@ header( "Content-type: application/msword" );
         header("Cache-control: private");
 
     $id = $_GET['id'];
-    
-    
+
     echo '
      <html>
             <head>
@@ -117,20 +108,13 @@ header( "Content-type: application/msword" );
             <meta name="revisit-after" content="15 days"> 
             </head>
             <body>';
-    
-    
-    
+
     include('components/com_k2/element.php');
-    
-    
+
     echo '</body>
             </html>';
-    
     exit();
-
 }
-
-
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="nojs">
@@ -159,9 +143,7 @@ header( "Content-type: application/msword" );
     
 	<!-- + scripts -->
     <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/script21.js"></script>	     
-	<!-- - scripts -->   
-	
-                    
+	<!-- - scripts -->
     <style>
 .item-page{
 display: none;
@@ -175,15 +157,12 @@ padding-top: 5px;
 
 </style>
 
-
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-
 
 </head>
 <body>
 <div id="google_translate_element" style="display:none; position:absolute; z-index:999999; "></div>
     <link rel="stylesheet" type="text/css" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/st.css" />
-
 
 <div class="box">
 
@@ -203,17 +182,13 @@ padding-top: 5px;
 			</div>		
 			<div class="typeobject">
 				<ul>
-				
-				
+
 				<?php
 					if(JRequest::getVar( 'TYPESITE' ) == '')
 						$TYPESITE = 1;
 					else					
                         $TYPESITE = 	JRequest::getVar( 'TYPESITE' );
-		
-                    
-        
-        
+
 					$query = "SELECT * FROM 0y13_ray_typeobject WHERE id > 1";
 								
 					$db->setQuery($query);		
@@ -248,14 +223,8 @@ padding-top: 5px;
                                 var us = 1;
                                 </script>
                                 ';
-                        
                     }
 				?>
-				
-				
-				
-				
-				
 				</ul>
 			</div>		
 		</div>
@@ -285,8 +254,6 @@ else
 		{
 			echo $script;
 		}
-
-
 ?>
 <!--***********************************************************************************************************************************************************************************************************************************-->
 <div class="menu-class2">
@@ -303,9 +270,7 @@ else
     }
     ?>
 
-</div>        
-        
-		
+</div>
 		</div>
 		<div class="center">
 		
@@ -410,9 +375,7 @@ function get_cantry($ferst_word, $uin)
             return '  <a href="' . $ferst_word . '-' . $row_temp->alias2 . '"> ' . $row_temp->name . ' </a>  <img src="templates/atomic/images/strela.png">   ';
     }
 }
-			
-		
-		
+
 function get_region($ferst_word, $uin)
 {
 	$db = & JFactory::getDBO();
@@ -433,8 +396,7 @@ function get_region($ferst_word, $uin)
 		return '  <a href="'.$ferst_word.'-'.$row_temp->alias2.'"> '.$row_temp->name.' </a> <img src="templates/atomic/images/strela.png">  ';
 	}
 }
-			
-		
+
 function get_naspunkt($ferst_word, $uin)
 {
 	$db = & JFactory::getDBO();
@@ -481,22 +443,17 @@ function get_servis($uin)
 	
 	if(JRequest::getInt( 'naspunkt' ))	
 	{
-	
 		$query="SELECT * FROM 0y13_ray_naspunkt WHERE id=".JRequest::getInt( 'naspunkt' ) ;
 		$db->setQuery($query);		
 		$row = $db->loadObject();
-	
 	}
 	elseif(JRequest::getInt( 'region' ))	
 	{
-	
 		$query="SELECT * FROM 0y13_ray_region WHERE id=".JRequest::getInt( 'region' ) ;
 		$db->setQuery($query);		
 		$row = $db->loadObject();
 	
 	}
-	
-		
 	$query_temp="SELECT * FROM 0y13_ray_servis WHERE id = ".$uin ;
 			
 	$db->setQuery($query_temp);		
@@ -533,7 +490,6 @@ function get_servis($uin)
 				
 			}
 		}
-			
 		?>
 		<div class="simbad" style=" float:left; width:100%; ">
 				<jdoc:include type="component" />
@@ -548,14 +504,11 @@ if($controller == 'article' && $com_content == 'com_content' && $id == 5 )
 ?>
 <div id="map" style="width: 600px; height: 300px; float:left; "> </div>
 <?php
-
 }
 ?> 			
 				</div>
 				<div style="padding-top:5px;  " ><form action="index.php?option=com_k2&view=seach" method="post">	<input type="text" name="text" style="width:64%; border:1px solid #c6c7c7; height:18px; margin-left:5px; float: left;" id="fseatch" > <input id="bseatch"  type="submit" value="поиск" style="width:5%; background: #42d00c; background: url('<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/btse.png') no-repeat top center; width: 77px; height:22px; padding-bottom:3px; color:#3b6a08; border:none; float: left; margin-right:5px; "> </form> </div>
 				<div class="footmenu" style="height:30px;">
-				
-				
 				<jdoc:include type="modules" name="atomic-topmenu3" style="container" /> 
 				
 				<!--
@@ -570,21 +523,14 @@ if($controller == 'article' && $com_content == 'com_content' && $id == 5 )
 				-->
 				
 				</div>
-
-    
-         
 				</div>
 		</div>
 		<div class="right">
 
 <!--  **************************************************************************************************************************************************************************************  -->			
 <div class="menu-class1">		
-<?php $nlist=3; 
-
-
-
-
-
+<?php
+$nlist=3;
 if(JRequest::getVar( 'view' ) != 'region' && JRequest::getVar( 'view' ) != 'servis'  && JRequest::getVar( 'view' ) != 'naspunkt'  && JRequest::getVar( 'view' ) != 'item'){
 include("region.php"); 
 }
@@ -607,7 +553,6 @@ else
         include("region.php");
     }
     ?>
-
  </div>
 	</div>	
 		
@@ -620,7 +565,6 @@ $controller = JRequest::getWord('view', 'itemlist');
 
 if($controller != 'item'  && $controller != 'naspunkt' && $controller != 'servis')
 {
-
 	$db = & JFactory::getDBO();
 
 //echo '<h1> '.urldecode($_SERVER['REQUEST_URI']).' </h1>'; гостиница эдем адрес
@@ -661,12 +605,6 @@ if($controller != 'item'  && $controller != 'naspunkt' && $controller != 'servis
     {
         $whr = " and naspunk in (SELECT id FROM 0y13_ray_naspunkt WHERE to".($TYPESITE-1)."=1) ";
     }
-
-    
-    
-    
-    
-    
   $queryst_banner_fixed=" SELECT  id,		 	 	
 	name, 	 	 	 
 	alias,	
@@ -769,14 +707,12 @@ IF ((SELECT COUNT(*) FROM 0y13_ray_image WHERE main=1 and item=0y13_ray_item.id)
   }
   else
   {
-            
 			$title_doc = $row_b->servicealias.'-'.$row_b->alias.'-'.$row_b->naspunkalias;
             
             $banner .= ' <td style="width: 14.2%"> 
 				<a style="  text-align:center; " href="'.$title_doc.'" ><img style="width:160px; height:120px; " src="/'.$row_b->alias.'.jpg?object='.$row_b->id.'/&image='.$row_b->photo.'&mini=1"> </a>
 				<a href="'.$title_doc.'" style="  text-align:center; text-decoration: none;"> <span style="color: #28880a;"> '.str_replace("-", " ", $row_b->servicealias).' '.$row_b->name.' </span> <br> '.$row_b->ncantry.', '.$row_b->nregion.', '.$row_b->rayon.', '.$row_b->nnaspunk.' </a>
 			</td> ';
-    
 }
     }  
 ?>
@@ -938,40 +874,27 @@ $controller = JRequest::getWord('view', 'itemlist');
   font-size: 12px;
 }
 </style>
-<?					
-				echo '<div style="padding-top:3px; text-align:center; width:98%; float: left;  font-family: Arial,Helvetica,sans-serif;  font-size: 12px;" class="skjdnhf">  '.preg_replace('~class="[^"]*"~i', '', preg_replace('~style="[^"]*"~i', '',   $row_p->introtext)).' </div>';
-                }                
-            }             
-             elseif($controller == 'item' || $controller == 'servis'  ||  $controller == 'naspunkt'  ||  $controller == 'naspunkt' )
-             {
-             
-            echo '<div style="padding-top:3px; text-align:center; width:98%; float: left;">  </div>';
-            }
-             
- 
-            
-        
-        ?>
+<?
+    echo '<div style="padding-top:3px; text-align:center; width:98%; float: left;  font-family: Arial,Helvetica,sans-serif;  font-size: 12px;" class="skjdnhf">  ' . preg_replace('~class="[^"]*"~i', '', preg_replace('~style="[^"]*"~i', '', $row_p->introtext)) . ' </div>';
+}
+}
+             elseif ($controller == 'item' || $controller == 'servis' || $controller == 'naspunkt' || $controller == 'naspunkt') {
+
+echo '<div style="padding-top:3px; text-align:center; width:98%; float: left;">  </div>';
+}
+?>
 	
 	<div class="foot">
 		<div class="foot1">
 			<div class="foot2">
-            
 				<jdoc:include type="modules" name="atomic-topmenu2" style="container" /> 
 				<p>TvoyRay.ru 2007-2012. Рай.рф все права защищены © 2012-<?php echo date("Y"); ?></p>
 
 			</div>
 		</div>
 	</div>
-	
 	</div>
-
 </div>
-	
-	
-	
-	
-	
 </body>
 </html>
 
@@ -982,6 +905,7 @@ Added by bNick at 18.06.2014
 */
 function GetBanner($db){
     $getbanner = array(
+        //ToDo: Дефолтные значения должны браться со странницы "баннеры"
         "url" => "#",
         "src" => "banner.jpg"
     );
@@ -1006,5 +930,27 @@ function GetBanner($db){
         }
     }
     return $getbanner;
+}
+
+function hasBannerForCountry($counryID, $db){
+    $banner = array(
+        "url1" => "",
+        "src1" => "",
+        "url2" => "",
+        "src2" => "",
+        "url3" => "",
+        "src3" => "",
+    );
+    $query = "SELECT * FROM d0y13_ray_cantry  WHERE id ='" . $counryID . "' ";
+    $db->setQuery($query);
+    $row = $db->loadObject();
+    if (isset($row->banner1)) {
+        //ToDo: Проверка на время действия баннера
+        $getbanner["url"] = "#";
+        $getbanner["src"] = $row->banner1;
+    }
+    if (!empty($row)){
+
+    }
 }
 ?>

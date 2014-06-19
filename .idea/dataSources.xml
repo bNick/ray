@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1922189293">
+  <component name="DataSourceManagerImpl" format="xml" hash="3570720629">
     <data-source source="LOCAL" name="ray.dev" uuid="5e9c1cfe-5c99-42b8-b5ca-39fd1219cc36">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
