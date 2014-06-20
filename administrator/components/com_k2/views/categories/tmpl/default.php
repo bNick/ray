@@ -78,9 +78,9 @@ $query = "DELETE FROM  d0y13_ray_cantry WHERE id=".(JRequest::getVar('del'))." ;
 				<th>
 					Название
 				</th>
-                <th>
-                    Баннер
-                </th>
+<!--                <th>-->
+<!--                    Баннер-->
+<!--                </th>-->
 					
 				
 			</tr>
@@ -100,9 +100,9 @@ $query = "DELETE FROM  d0y13_ray_cantry WHERE id=".(JRequest::getVar('del'))." ;
 				<td>
                     <a href="<?php echo JRoute::_('index.php?option=com_k2&view=category&cid='.$servis->id); ?>"><?php echo  $servis->name; ?> </a>
                 </td>
-                <td>
-                    <a href="<?php echo JRoute::_('index.php?option=com_k2&view=category&cid='.$servis->id); ?>"><?php echo  $servis->banner1; ?> </a>
-                </td>
+<!--                <td>-->
+<!--                    <a href="--><?php //echo JRoute::_('index.php?option=com_k2&view=category&cid='.$servis->id); ?><!--">--><?php //echo  $servis->banner1; ?><!-- </a>-->
+<!--                </td>-->
 			</tr>	
 			<?php endforeach; ?>
 		</tbody>
