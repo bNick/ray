@@ -948,26 +948,4 @@ function GetBanner($db, $banner_type){
     }
     return $getbanner;
 }
-
-function hasBannerForCountry($counryID, $db){
-    $banner = array(
-        "url1" => "",
-        "src1" => "",
-        "url2" => "",
-        "src2" => "",
-        "url3" => "",
-        "src3" => "",
-    );
-    $query = "SELECT * FROM d0y13_ray_cantry  WHERE id ='" . $counryID . "' ";
-    $db->setQuery($query);
-    $row = $db->loadObject();
-    if (isset($row->banner1)) {
-        //ToDo: Проверка на время действия баннера
-        $getbanner["url"] = "#";
-        $getbanner["src"] = $row->banner1;
-    }
-    if (!empty($row)){
-
-    }
-}
 ?>
