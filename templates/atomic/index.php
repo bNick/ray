@@ -175,7 +175,7 @@ padding-top: 5px;
 				<div class="banner2">
                     <?php
                     $db = & JFactory::getDBO();
-                    $ban = GetBanner($db);
+                    $ban = GetBanner($db, 0);
                     echo ' <a href="' . $ban["url"] . '"> <img style="width:854px; height: 87px;" src="' . $ban["src"] . '" class="topbanned"> </a> ';
                     ?>
 				</div>
@@ -903,14 +903,14 @@ echo '<div style="padding-top:3px; text-align:center; width:98%; float: left;"> 
 Added by bNick at 18.06.2014
 в рамках проекта кастомизации баннерной системы сайта
 */
-function GetBanner($db){
+function GetBanner($db, $banner_type){
     $getbanner = array(
         //ToDo: Дефолтные значения должны браться со странницы "баннеры"
         "url" => "#",
         "src" => "banner.jpg"
     );
 
-    $query = "SELECT * FROM 0y13_ray_banner  WHERE page ='" . urldecode($_SERVER['REQUEST_URI']) . "' and position='0' and data > '" . date("Y-m-d") . "'  ORDER BY RAND()  limit 1; ";
+    $query = "SELECT * FROM 0y13_ray_banner  WHERE page ='" . urldecode($_SERVER['REQUEST_URI']) . "' and position='". $banner_type ."' and data > '" . date("Y-m-d") . "'  ORDER BY RAND()  limit 1; ";
     $db->setQuery($query);
 
     if ($row = $db->loadObject()) {
