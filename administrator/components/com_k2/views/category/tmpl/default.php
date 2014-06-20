@@ -27,9 +27,9 @@ text2 =  '".$_POST['text2']."',
 text3 =  '".$_POST['text3']."',
 text0 =  '".$_POST['text0']."',
 banner1 = '".$_POST['banner1']."',
-banner2 = '".$_POST['banner4']."',
+banner2 = '".$_POST['banner2']."',
 banner3 = '".$_POST['banner3']."',
-banner4 = '".$_POST['banner2']."',
+banner4 = '".$_POST['banner4']."',
 url2 = '".$_POST['url2']."',
 url3 = '".$_POST['url3']."',
 url4 = '".$_POST['url4']."',
@@ -191,7 +191,7 @@ else
                         </tr>
                         <tr>
                             <td class="adminK2LeftCol">
-                                <label for="banner2">Баннер для страны (право-верх)</label>
+                                <label for="banner2">Баннер для страны (лево)</label>
                             </td>
                             <td class="adminK2RightCol">
                                 <input class="text_area k2TitleAliasBox" type="text" name="banner2" value="<?php echo $row->banner2; ?>" />
@@ -199,7 +199,7 @@ else
                         </tr>
                         <tr>
                             <td class="adminK2LeftCol">
-                                <label for="url2">URL (право-верх)</label>
+                                <label for="url2">URL (лево)</label>
                             </td>
                             <td class="adminK2RightCol">
                                 <input class="text_area k2TitleAliasBox" type="text" name="url2" value="<?php echo $row->url2; ?>" />
@@ -207,7 +207,7 @@ else
                         </tr>
                         <tr>
                             <td class="adminK2LeftCol">
-                                <label for="banner3">Баннер для страны (право-низ)</label>
+                                <label for="banner3">Баннер для страны (право-верх)</label>
                             </td>
                             <td class="adminK2RightCol">
                                 <input class="text_area k2TitleAliasBox" type="text" name="banner3" value="<?php echo $row->banner3; ?>" />
@@ -215,7 +215,7 @@ else
                         </tr>
                         <tr>
                             <td class="adminK2LeftCol">
-                                <label for="url3">URL (право-низ)</label>
+                                <label for="url3">URL (право-верх)</label>
                             </td>
                             <td class="adminK2RightCol">
                                 <input class="text_area k2TitleAliasBox" type="text" name="url3" value="<?php echo $row->url3; ?>" />
@@ -223,7 +223,7 @@ else
                         </tr>
                         <tr>
                             <td class="adminK2LeftCol">
-                                <label for="banner4">Баннер для страны (лево)</label>
+                                <label for="banner4">Баннер для страны (право-низ)</label>
                             </td>
                             <td class="adminK2RightCol">
                                 <input class="text_area k2TitleAliasBox" type="text" name="banner4" value="<?php echo $row->banner4; ?>" />
@@ -231,7 +231,7 @@ else
                         </tr>
                         <tr>
                             <td class="adminK2LeftCol">
-                                <label for="url4">URL (лево)</label>
+                                <label for="url4">URL (право-низ)</label>
                             </td>
                             <td class="adminK2RightCol">
                                 <input class="text_area k2TitleAliasBox" type="text" name="url4" value="<?php echo $row->url4; ?>" />
