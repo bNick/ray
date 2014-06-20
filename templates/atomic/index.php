@@ -925,7 +925,7 @@ function GetBanner($db, $banner_type){
         $row = $db->loadObject();
         if (isset($row->banner1)) {
             //ToDo: Проверка на время действия баннера
-            $getbanner["url"] = "#";
+            $getbanner["url"] = $row->url1;
             $getbanner["src"] = $row->banner1;
         }
     }
