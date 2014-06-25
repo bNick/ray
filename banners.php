@@ -8,10 +8,8 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-
 function GetBanner($db, $banner_type){
     $getbanner = array(
-        //ToDo: Дефолтные значения должны браться со странницы "баннеры"
         "url" => "/",
         "src" => "banner.jpg"
     );
@@ -22,52 +20,21 @@ function GetBanner($db, $banner_type){
     }elseif (IsCountryPage()){
         $getbanner = CountryBanner($db, $banner_type, $ids, $getbanner);
         $getarticlebanner = ArticleBanner($db, $banner_type, $getbanner);
+
         $getbanner["url"] = ($getarticlebanner["url"] == "/") ? $getbanner["url"] : $getarticlebanner["url"];
         $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg") ? $getbanner["src"] : $getarticlebanner["src"];
     }elseif (IsRegionPage()){
         $getregionbanner = RegionBanner($db, $banner_type, $ids, $getbanner);
         $getbanner = CountryBanner($db, $banner_type, $ids, $getbanner);
         $getarticlebanner = ArticleBanner($db, $banner_type, $getbanner);
+
+
         $getbanner["url"] = ($getarticlebanner["url"] == "/") ? $getbanner["url"] : $getregionbanner["url"];
         $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg") ? $getbanner["src"] : $getregionbanner["src"];
         $getbanner["url"] = ($getarticlebanner["url"] == "/") ? $getbanner["url"] : $getarticlebanner["url"];
         $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg") ? $getbanner["src"] : $getarticlebanner["src"];
     }
-
-
-
-/*    if (empty($ids["countryID"]) & empty($ids["regionID"])){
-        //Главная страница
-        $getbanner = ArticleBanner($db, $banner_type);
-    }elseif(!empty($ids["countryID"]) & empty($ids["regionID"])){
-        //Страны
-        $getarticlebanner = ArticleBanner($db, $banner_type);
-        $getcountrybanner = GetCountryBanner($db, $banner_type, $ids);
-        $getbanner["url"] = ($getarticlebanner["url"] == "/")?"/":$getcountrybanner["url"];
-        $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg")?"banner.jpg":$getcountrybanner["src"];
-    }elseif(!empty($ids["countryID"]) & !empty($ids["regionID"])){
-        //Регионы
-        $getarticlebanner = ArticleBanner($db, $banner_type);
-        $getcountrybanner = GetCountryBanner($db, $banner_type, $ids);
-        $getregionbanner = GetRegionBanner($db, $banner_type, $ids);
-
-        $getbanner["url"] = ($getarticlebanner["url"] == "/")?"/":$getcountrybanner["url"];
-        $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg")?"banner.jpg":$getcountrybanner["src"];
-    }*/
-
     return $getbanner;
-}
-
-function IsMainPage(){
-    return ($_REQUEST["view"] == "article") ? true : false;
-}
-
-function IsCountryPage(){
-    return ($_REQUEST["view"] == "cantry") ? true : false;
-}
-
-function IsRegionPage(){
-    return ($_REQUEST["view"] == "region") ? true : false;
 }
 
 function GetID(){
@@ -86,6 +53,18 @@ function GetID(){
     }
     return array("countryID" => $countryID, "regionID" => $regionID);
 }
+
+function IsMainPage(){
+    return ($_REQUEST["view"] == "article") ? true : false;
+}
+function IsCountryPage(){
+    return ($_REQUEST["view"] == "cantry") ? true : false;
+}
+function IsRegionPage(){
+    return ($_REQUEST["view"] == "region") ? true : false;
+}
+
+
 function ArticleBanner($db, $banner_type, $getbanner){
     $query = "SELECT * FROM 0y13_ray_banner  WHERE page ='" . urldecode($_SERVER['REQUEST_URI']) . "' and position='". $banner_type ."' and data > '" . date("Y-m-d") . "'  ORDER BY RAND()  limit 1; ";
     $db->setQuery($query);
