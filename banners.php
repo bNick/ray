@@ -18,11 +18,20 @@ function GetBanner($db, $banner_type){
     $ids = GetID();
 
     if (IsMainPage()){
-        $getbanner = ArticleBanner($db, $banner_type);
+        $getbanner = ArticleBanner($db, $banner_type, $getbanner);
     }elseif (IsCountryPage()){
-        $getbanner = $getbanner;
+        $getbanner = CountryBanner($db, $banner_type, $ids, $getbanner);
+        $getarticlebanner = ArticleBanner($db, $banner_type, $getbanner);
+        $getbanner["url"] = ($getarticlebanner["url"] == "/") ? $getbanner["url"] : $getarticlebanner["url"];
+        $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg") ? $getbanner["src"] : $getarticlebanner["src"];
     }elseif (IsRegionPage()){
-        $getbanner = $getbanner;
+        $getregionbanner = RegionBanner($db, $banner_type, $ids, $getbanner);
+        $getbanner = CountryBanner($db, $banner_type, $ids, $getbanner);
+        $getarticlebanner = ArticleBanner($db, $banner_type, $getbanner);
+        $getbanner["url"] = ($getarticlebanner["url"] == "/") ? $getbanner["url"] : $getregionbanner["url"];
+        $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg") ? $getbanner["src"] : $getregionbanner["src"];
+        $getbanner["url"] = ($getarticlebanner["url"] == "/") ? $getbanner["url"] : $getarticlebanner["url"];
+        $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg") ? $getbanner["src"] : $getarticlebanner["src"];
     }
 
 
@@ -77,17 +86,19 @@ function GetID(){
     }
     return array("countryID" => $countryID, "regionID" => $regionID);
 }
-function ArticleBanner($db, $banner_type){
+function ArticleBanner($db, $banner_type, $getbanner){
     $query = "SELECT * FROM 0y13_ray_banner  WHERE page ='" . urldecode($_SERVER['REQUEST_URI']) . "' and position='". $banner_type ."' and data > '" . date("Y-m-d") . "'  ORDER BY RAND()  limit 1; ";
     $db->setQuery($query);
 
     if ($row = $db->loadObject()) {
-        $getbanner["url"] = $row->url;
-        $getbanner["src"] = $row->object;
+//        $getbanner["url"] = $row->url;
+//        $getbanner["src"] = $row->object;
+        $getbanner["url"] = !empty($row->url) ? $row->url : "/";
+        $getbanner["src"] = !empty($row->object) ? $row->object : "banner.jpg";
     }
     return $getbanner;
 }
-function GetCountryBanner($db, $banner_type, $ids){
+function CountryBanner($db, $banner_type, $ids, $getbanner){
     //Проверяем наличие ссылки на баннер в разделе "страны"
     $query = "SELECT * FROM d0y13_ray_cantry  WHERE id ='" . $ids["countryID"] . "' ";
     $db->setQuery($query);
@@ -115,7 +126,7 @@ function GetCountryBanner($db, $banner_type, $ids){
     }
     return $getbanner;
 }
-function GetRegionBanner($db, $banner_type, $ids){
+function RegionBanner($db, $banner_type, $ids, $getbanner){
     $query = "SELECT * FROM 0y13_ray_region  WHERE id ='" . $ids["countryID"] . "' ";
     $db->setQuery($query);
     $row = $db->loadObject();
