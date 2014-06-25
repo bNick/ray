@@ -17,27 +17,50 @@ function GetBanner($db, $banner_type){
     );
     $ids = GetID();
 
-    if (empty($ids["countryID"]) & empty($ids["regionID"])){
+    if (IsMainPage()){
+        $getbanner = ArticleBanner($db, $banner_type);
+    }elseif (IsCountryPage()){
+        $getbanner = $getbanner;
+    }elseif (IsRegionPage()){
+        $getbanner = $getbanner;
+    }
+
+
+
+/*    if (empty($ids["countryID"]) & empty($ids["regionID"])){
         //Главная страница
-        $getbanner = GetArticleBanner($db, $banner_type);
+        $getbanner = ArticleBanner($db, $banner_type);
     }elseif(!empty($ids["countryID"]) & empty($ids["regionID"])){
         //Страны
-        $getarticlebanner = GetArticleBanner($db, $banner_type);
+        $getarticlebanner = ArticleBanner($db, $banner_type);
         $getcountrybanner = GetCountryBanner($db, $banner_type, $ids);
         $getbanner["url"] = ($getarticlebanner["url"] == "/")?"/":$getcountrybanner["url"];
         $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg")?"banner.jpg":$getcountrybanner["src"];
     }elseif(!empty($ids["countryID"]) & !empty($ids["regionID"])){
         //Регионы
-        $getarticlebanner = GetArticleBanner($db, $banner_type);
+        $getarticlebanner = ArticleBanner($db, $banner_type);
         $getcountrybanner = GetCountryBanner($db, $banner_type, $ids);
         $getregionbanner = GetRegionBanner($db, $banner_type, $ids);
 
         $getbanner["url"] = ($getarticlebanner["url"] == "/")?"/":$getcountrybanner["url"];
         $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg")?"banner.jpg":$getcountrybanner["src"];
-    }
+    }*/
 
     return $getbanner;
 }
+
+function IsMainPage(){
+    return ($_REQUEST["view"] == "article") ? true : false;
+}
+
+function IsCountryPage(){
+    return ($_REQUEST["view"] == "cantry") ? true : false;
+}
+
+function IsRegionPage(){
+    return ($_REQUEST["view"] == "region") ? true : false;
+}
+
 function GetID(){
     switch ($_REQUEST["view"]){
         case "cantry":
@@ -54,7 +77,7 @@ function GetID(){
     }
     return array("countryID" => $countryID, "regionID" => $regionID);
 }
-function GetArticleBanner($db, $banner_type){
+function ArticleBanner($db, $banner_type){
     $query = "SELECT * FROM 0y13_ray_banner  WHERE page ='" . urldecode($_SERVER['REQUEST_URI']) . "' and position='". $banner_type ."' and data > '" . date("Y-m-d") . "'  ORDER BY RAND()  limit 1; ";
     $db->setQuery($query);
 
