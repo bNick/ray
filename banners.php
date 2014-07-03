@@ -36,6 +36,8 @@ function GetBanner($db, $banner_type){
         $getbanner["src"] = ($getarticlebanner["src"] == "banner.jpg") ? $getbanner["src"] : $getarticlebanner["src"];
 
         $getbanner["url"] = ($getbanner["url"] == DEFAULT_URL) ? $getcountrybanner["url"] : $getbanner["url"];
+        $getbanner["url"] = (($getbanner["url"] == $getcountrybanner["url"]) and ($getbanner["src"] != $getcountrybanner["src"])) ? DEFAULT_URL : $getbanner["url"];
+
         $getbanner["src"] = ($getbanner["src"] == "banner.jpg") ? $getcountrybanner["src"] : $getbanner["src"];
 
 
